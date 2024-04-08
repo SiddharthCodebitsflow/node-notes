@@ -1,0 +1,74 @@
+React Qeustions topics:
+
+
+1. Hooks
+		--useState
+		--useEffect
+		--useContext
+		--useReducer
+		--useMemo
+		--useCallback
+		--useRef
+2.Higher Order components
+
+		-- What, why, when , how , machine coding 
+		   round ?
+
+3.Class level componets
+
+4.Life cycle methods of componetns
+
+5.State management (all about data)
+
+		-- State/ props
+		-- Props driling
+		-- context api
+6. Redux / Zustand
+
+		-- How , why , when .
+		-- Redux tollket (RTK) .
+
+7. Custom Hooks
+
+		-- When, why, how , write code for custom hook
+		
+8. Lazy loading
+
+		-- code spliting 
+		-- chunking
+		-- suspense 
+		-- Highely asked
+
+9. Virtual dom
+
+		-- Reconsilation algorithm
+		-- react fiber algorithm
+		-- render
+		-- Diffing algorithm
+		-- How render them (by tree)
+
+10. SSR (server side rendring) vs CSR (client side render) 
+
+11. Routing (RBAC (Role base access controller))
+
+		-- react router (need to be library for 
+		    routing in react)
+
+		-- private or protected routes.
+		-- public routes
+
+12.Testing 
+
+		-- React testing library in react
+
+13. Async task
+
+		-- api calls
+		-- events
+		-- fetch
+		-- axios
+14. Resusability / modularity / testability
+
+15. Performance 
+
+		

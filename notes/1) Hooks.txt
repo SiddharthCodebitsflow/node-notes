@@ -1,0 +1,141 @@
+1) Hooks 
+ 
+ 		-- We are use hook for use the functionality of class base components or life cycle method .
+ 		-- Because react life-cycle desine in the class base components so we can use their functionaliy in the 
+ 			functional components with the help of hooks .
+ 		-- we can not use hook inside the class base components.
+
+ 		-- There are many type of hooks in react which are define below :
+
+
+   (i) useState 
+
+   			-- useState hook are use for set the state .
+   			-- we can't set directly state in functional components so we need to be useState hook .
+
+   (ii) useEffect 
+
+   			-- useEffect hook are use for use the functionality of react life cycle such as componentWillMount, 
+   				componentDidMount, componentDidUpdate etc.. 
+   			-- useEffect hook call when change the state , render the components and change the props etc. 
+   			-- we can call useEffect hook on the bases of conditions such as we want to call useEffect hook only when 
+   				change one particular state so we can define the condition accodingly.
+
+
+   	(iii) useContext :
+
+   			-- useContext are use for store data in state as a globally and we can access in any components.
+   			-- useContext inbuild hook on react and redux is exernal library.
+   			-- we can validate which components we are use inside the useContext api but in the redux we need to wrap 
+   				full project inside the redux but in the useContext not need.
+
+   	(iv) useReducer :
+
+   			-- useReducer are use for set state globally .
+   			-- It is similar to redux.
+   			-- It is inbuild hook in react .
+   			-- It use on samll projects.
+
+   			import { useReducer } from 'react';
+
+			function reducer(state, action) {
+			  if (action.type === 'incremented_age') {
+			    return {
+			      age: state.age + 1
+			    };
+			  }
+			  throw Error('Unknown action.');
+			}
+
+			export default function Counter() {
+			  const [state, dispatch] = useReducer(reducer, { age: 42 });
+
+			  return (
+			    <>
+			      <button onClick={() => {
+			        dispatch({ type: 'incremented_age' })
+			      }}>
+			        Increment age
+			      </button>
+			      <p>Hello! You are {state.age}.</p>
+			    </>
+			  );
+			}
+
+	(v) useMemo :
+
+			-- useMemo funtion are use for call funtion on the base fo conditions.
+			-- useMemo are reduce the perfomance .
+			-- useMemo are memorize the return data by function by cache.
+			-- useMemo are strik the rendring small part of components.
+
+
+			import { useState, useMemo } from "react";
+			import ReactDOM from "react-dom/client";
+
+			const App = () => {
+			  const [count, setCount] = useState(0);
+			  const [todos, setTodos] = useState([]);
+			  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+
+			  const increment = () => {
+			    setCount((c) => c + 1);
+			  };
+			  const addTodo = () => {
+			    setTodos((t) => [...t, "New Todo"]);
+			  };
+
+			  return (
+			    <div>
+			      <div>
+			        <h2>My Todos</h2>
+			        {todos.map((todo, index) => {
+			          return <p key={index}>{todo}</p>;
+			        })}
+			        <button onClick={addTodo}>Add Todo</button>
+			      </div>
+			      <hr />
+			      <div>
+			        Count: {count}
+			        <button onClick={increment}>+</button>
+			        <h2>Expensive Calculation</h2>
+			        {calculation}
+			      </div>
+			    </div>
+			  );
+			};
+
+			const expensiveCalculation = (num) => {
+			  console.log("Calculating...");
+			  for (let i = 0; i < 1000000000; i++) {
+			    num += 1;
+			  }
+			  return num;
+			};
+
+	(vi) useCallback :
+
+			-- useCallback are use for render component when anything is change .
+			-- useCallback are take functionality for render the component base on the condition .
+
+					default export Component(){
+						const [stateValue,setStateValue]=useState("data");
+						const callFuntion=useCallback(()=>{
+						console.log("Add new");
+						},[stateValue]);
+						return <div>
+							<OtherComponent callFuntion={callFuntion} />
+						</div>
+					}
+
+	(vii) useRef :
+
+			-- useRef hook use for getting the refrence of input field dom .
+			-- useRef hook provide full dom of input filed and with the help of this we can access all the value and 
+				event .
+
+
+2) Higher Order components:
+
+			--  In React, a higher-order component is a function that takes a component as an argument and returns a new 
+				component that wraps the original component.

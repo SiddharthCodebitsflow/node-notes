@@ -1,0 +1,334 @@
+** Node js:
+
+1. Node js is not a language.
+2. This is server env (Run time env.). 
+3. Node js can connect with database.
+4. Node js use chrome v8 enginee.
+5. v8 engine use c++;
+
+6. Node js env. = embbeded (v8 engine + c++) .
+
+7. We can not use import math from "./math.js" due to Node js use old javascirpt and this browser use updated javasript.
+
+		Syntax of export function :
+
+				funtion sum(){
+					return "export funtion";
+				}
+
+				module.exports={sum};
+					or 
+				module.exports={sumFun:sum};
+
+		Syntax of import function:
+			
+				const math=require('./math');
+				
+				console.log(math.sum());
+						or
+				console.log(math.sumFun);
+
+				const {sum}=require('./math');
+
+
+
+*** Core Module **
+
+1. There are two type of core moduel 
+	
+	(i) Global modules : (we don't need to import directly use inside the js file such as console.log("hello") we are 
+		not need import console.log we can directly use it. )
+	(ii) Non-global module : ( We need to import import module such as fs node modules)
+
+2. Core module already maked inside the our javascipt or node js such as : fs, Buffer, HTTPS etc.
+
+** package.json **
+
+	=> Package is collection of pre-defined code. .
+	=> Containe all information about installed package.
+	=> package.lock.json are contain brifly inforamtion about the installed package.
+
+** Nodemon **
+
+ 	=> Nodemon is a package on node.js that use for run env. without restart the setup.
+ 	=> We can use this package as a global or local . global means we don't need to install in every project.
+ 	=> This package use only development time.
+
+** Important point **
+
+	=> Node js Async language depends on the category. If we discuss about the thread we are saying javaScript is a 
+	   single thread and if we are discuass async or sync so we are saying javaScript is a Async language
+
+		=> What is Async and sync?
+		
+			=> Async measn if we are send two request R1 and R2 and R1 is take time so node.js are not wait for R1 request response . It will be execute next request R2. 
+		
+			=> sync means it will be wait for R1 request response then execute R2 request.
+
+		=> We can't access file out of current directory using node js due to it's work as a webserver so it can access 	file inside the current env.
+
+
+** Created Basic Api using Node js **
+
+	=> Syntax of created the http server using node 
+
+			const http = require('http');
+
+			http.createServer((req, res) => {
+			    res.writeHead(200, { 'Content-Type': 'application/json' });
+			    res.write(JSON.stringify({ name: "siddharth" }));
+			    res.end();
+			}).listen(5000);
+
+** Input from command line **
+
+		=> console.log(process);
+
+		 	process are containe almost all property of node js . It return one object of node js property. 
+
+		 	process.argv : return two properties 
+
+		 		1. '/home/hestabit/.nvm/versions/node/v14.10.0/bin/node',  (file saved path)
+ 				2. '/home/hestabit/Documents/Node js/node/practice1/index.js' (file run env. path)
+
+ 				It is containe also one array 1. file saved path and 2. fiel run env. path if we are take third argument in the command line such as :
+
+ 					node index.js Hello 
+
+ 				so it will be return 3 object as a array if we want to access this value so we can use from below type :
+
+ 					 console.log(process.argv[2]);
+
+ 	******** Task 1 *******
+
+ 	  1. If we write in the command line "node index.js simpleTest.txt 'Hello how are you This is testing file for 	
+ 	  	learning purpose'" Then create one text file by simpleTesting.txt and show text in the file Hello how are you this is testing file for learning purpose;
+
+ 	  2. Execute following operations:
+
+ 	   	=> node index.js add simpleTest.txt 'Hello how are you' --->   output: create simpleeTest.txt file and write
+ 	   	   text inside the created file Hello how are you;
+ 	   	=> node index.js remove simpleTest.txt ---> output Removed taked file.
+ 	  
+
+
+FS module:
+
+
+		=>  let fileData = fs.readFileSync(filePath + '/simple.txt', 'utf8');
+				console.log(fileData);
+		--> Fs file module is part of node js. it is use for write , read, all over file operations.
+		--> fs.readFileSync('file_name','type') function are use for read the any file sync mode .
+		--> fs.writeFileSync('file_name','content') function are use for write and create the file.
+
+path module:
+
+		const path = require('path');
+ 		const filePath = path.join(__dirname, 'file');
+
+ 		=> path is predefine node module . It's use for find current directory path .
+ 		=> path.join(__dirname,'file') . join are use for add the path in the base path . and __dirname is get current 		directory of current file.
+ 	
+ 		=>readir() function are use for getting all file of taked directory . It is console all files name as a array. 
+				 
+			Syntax: 
+
+				 let fileDir = fs.readdir(filePath, (err, files) => {
+				    console.log(files);
+				       files.forEach((item)=>{
+							console.log(item);  // forEach is use for getting file name from array.
+    					})
+				})
+
+
+
+
+************************ Node js working flow *************************
+
+=> Node js follow following step:
+		
+			==>  (callStack --> Node API --> call back queue)
+
+				=> callStack internaly call main funtion (All code present inside the main function due to node.js run 
+					javascript on the machine with the help of c++ ) .
+
+				=>  Example : If i am write console.log("hello"); 
+
+				                    console is a class in and log is a funtion so log move in the stack;
+
+				                    For more inromation search on the google and check image. 
+
+
+						console.log("start execution");  // First execute
+
+						setTimeout(() => {
+						    console.log("time 2 sec"); // four execute
+						}, 2000);
+
+						setTimeout(() => {
+						    console.log("time 0 sec"); // third execute
+						}, 0);
+
+						console.log("finish execution"); // second execute
+
+			=> SetTimeout is not function of javaScript . It is part of c++ . It is inherit functionality using Node API 
+				and callback queue . 
+
+			=> Call stack not take c++ function rather inherit from c++ using Node API.
+
+
+
+******************** Express.js  ***********************************
+		
+		=> npm i express
+
+			const express = require('express');  
+
+		=> require the express inside the file for use and created the end points
+
+			const app = express();
+
+		=> create the variable for initialize express app . This is executed function of express.
+
+			app.get("/first-route", (req, res) => {
+			    res.send("This is query data "+req.query.name); // print query data 
+			});
+
+		=> create get request and get the query data form url using req.query.name , name is a query parems variable 
+			name.
+
+			app.listen(5000);
+
+		=> listen is a get port for run my node app .
+
+				app.get("/first-route", (req, res) => {
+					    res.send(`<h1>This is query data ${req.query.name}`); // print query data 
+				});
+
+		=> We can send HTML in the res and render on pages.
+
+
+
+************************ Render Html file by express ******************
+
+			const express = require('express');
+			const path = require('path');
+
+			const publicPath = path.join(__dirname, 'view');
+
+		=> Using Inside the public path we are take view directory path . 
+
+			const app = express();
+
+			app.use(express.static(publicPath));
+
+		=> express.static(publicPath) function use for render html file with env. 
+		=> we need to be write route file name with ext. 
+
+		=>  Send file on the route :
+
+				const publicPath = path.join(__dirname, 'view');
+
+				const app = express();
+
+				app.use(express.static(publicPath));
+
+				app.get('/about',(_,res)=>{
+				    res.sendFile(`${publicPath}/about.html`);
+				});
+
+
+
+****************** Template engine ***********************
+
+
+	=> Template engine are use for render data on html using node js .
+	=> We have multiple template engine package in node js but we are use ejs .
+	=> make sure your view folder name should be views (name shuold be correct) because ejs default access views folders.
+	=> we are save file name inside the views folder home.ejs (extention should be .ejs);
+
+		=> npm i ejs
+
+				const express = require('express');
+
+				const app = express();
+
+				app.set('view engine', 'ejs');  // register view ejs template engine 
+
+				app.get('/', (_, res) => {  		// Send dynamic data on template .
+				    const heading = {
+				        "heading1": "This is heading one",
+				        "heading2": "This is heading two",
+				        "heading3": "This is heading three",
+				    };
+				    res.render('home', { heading }); // render file with parameters.
+				});
+
+				app.get('/about', (_, res) => {
+				    res.render('about');  	// render about file.
+				});
+
+				app.listen(5000); 
+
+	Render data on the html file 
+
+			Syntax :
+
+					<body>
+					    <% Object.keys(heading).forEach((key)=> { %>
+					    <h1><%= heading[key] %></h1>
+					    <% }); %>
+
+					    <h1>Hello this is home file</h1>
+					</body>		
+
+
+********************* Mongo db ******************************
+
+CRUD Operations:
+
+		=> show dbs 								-----> use for show all presented database.
+		=> use database_name  						-----> use for switch database on selected name.
+		=> show collections 						-----> use for show all presented collections.
+		=> db.createCollection("collection_name");	-----> use for create collections .
+		=> db.user.find()							-----> use for find select all data .
+		=> db.user.find({name:'siddahrth'})			-----> use for find data base on the conditions.
+		=> db.user.find().limit(10);				-----> use for select only taked limit data. 
+		=> db.user.find().skip(3).limit(10)			-----> use for select data after skip taked limit data .
+		=> db.user.countDocuments();				-----> use for count data .
+		=> db.user.countDocuments({name:"siddharth"})----> use for count data base on the conditions.
+		=> db.user.drop()							-----> user for drop the collections. 
+
+		=> db.user.insertOne({"name":"siddharth","email":"Sidd@gmail.com"});
+					|
+					|---> Insert one object in current collection name.
+
+		=> db.user.insertMany([{"name":"siddharth","email":"Sidd@gmail.com"},{"name":"siddharth","email":"Sidd@gmail.com"		},{"name":"siddharth","email":"Sidd@gmail.com"}]);
+						|
+						|----> Insert many object in one time in the taked collection.
+
+		=> db.user.deleteMany({name:"sidd"}); 
+						|
+						|-----> Delete object by condition base if we are pass empty object so delete all objects.
+
+		=> db.user.deleteOne({name:"siddharth"});
+						|
+						|-----> Delete only one object by conditions.
+
+		=>  db.user.updateOne( { name: "siddharth" }, { $set: { age: 30 } } );
+						|
+						|-----> Update one object by conditions if any object key not present so it will be inserted	
+								into matched object.
+
+		=> db.user.updateMany( { name: "siddharth" }, { $set: { status: "inactive" } } )
+						|
+						|-----> Update many object based on the condition if seted key not present in object so it will 		be inserted .
+
+
+Index Operations:
+
+		
+		=>
+
+
+

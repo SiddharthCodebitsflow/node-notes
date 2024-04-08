@@ -1,0 +1,19 @@
+	=> What are the advantages of ReactJS?
+
+			=> React js easy to use. 
+			=> Render data both side clien-side and server-side.
+			=> jsx makes code easy to read and write.
+			=> Easy to integrate others to Angular etc. 
+
+	=> How does React work?
+
+			=> React create the virtual dom and check what's the change in virtual domain using difing alorightms and 	
+				change into main dom.
+
+	=> What is the use of refs?
+
+			=> refs are provide to access of dom .
+
+	=> What is Context API in ReactJS?
+
+			=> Context API privide t

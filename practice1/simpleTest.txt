@@ -1,0 +1,1 @@
+Then create one text file by simpleTesting.txt and show text in the file Hello how are you this is testing file for learning purpose
