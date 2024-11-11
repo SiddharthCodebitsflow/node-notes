@@ -1,0 +1,118 @@
+********************* Mongo db ******************************
+
+CRUD Operations:
+
+		=> show dbs 								-----> use for show all presented database.
+		=> use database_name  						-----> use for switch database on selected name.
+		=> show collections 						-----> use for show all presented collections.
+		=> db.createCollection("collection_name");	-----> use for create collections .
+		=> db.user.find()							-----> use for find select all data .
+		=> db.user.find({name:'siddahrth'})			-----> use for find data base on the conditions.
+		=> db.user.find().limit(10);				-----> use for select only taked limit data. 
+		=> db.user.find().skip(3).limit(10)			-----> use for select data after skip taked limit data .
+		=> db.user.countDocuments();				-----> use for count data .
+		=> db.user.countDocuments({name:"siddharth"})----> use for count data base on the conditions.
+		=> db.user.drop()							-----> user for drop the collections. 
+
+		=> db.user.insertOne({"name":"siddharth","email":"Sidd@gmail.com"});
+					|
+					|---> Insert one object in current collection name.
+
+		=> db.user.insertMany([{"name":"siddharth","email":"Sidd@gmail.com"},{"name":"siddharth","email":"Sidd@gmail.com"},{"name":"siddharth","email":"Sidd@gmail.com"}]);
+						|
+						|----> Insert many object in one time in the taked collection.
+
+		=> db.user.deleteMany({name:"sidd"}); 
+						|
+						|-----> Delete object by condition base if we are pass empty object so delete all objects.
+
+		=> db.user.deleteOne({name:"siddharth"});
+						|
+						|-----> Delete only one object by conditions.
+
+		=>  db.user.updateOne( { name: "siddharth" }, { $set: { age: 30 } } );
+						|
+						|-----> Update one object by conditions if any object key not present so it will be inserted	
+								into matched object.
+
+		=> db.user.updateMany( { name: "siddharth" }, { $set: { status: "inactive" } } )
+						|
+						|-----> Update many object based on the condition if seted key not present in object so it will 		be inserted .
+
+
+		=> db.user.updateMany({name:'siddharth6'},{$push:{skils:"Laravel"}})
+						|
+						|-----> when name is siddharth6 then push Laravel into skils data 
+
+									   {
+			 						    _id: ObjectId('67327202bf5c9a79e8c1c195'),
+									    name: 'siddharth6',
+									    email: 'siddharth6@gmail.com',
+									    yearOfExperice: '15',
+									    age: 25,
+									    skils: [ 'react.js', 'node.js', 'vue.js', 'next.js', 'Laravel' ]
+									  }
+
+
+	    => db.user.updateMany({name:'siddharth6'},{$push:{skils:{$each:["Laravel","machine learning","Php","javaScript"]}}})
+	    				|
+	    				|-----> update multiple value in Array.
+
+	    => db.user.update({name:"siddharth5"},{$unset:{age:""}});
+	    				|
+	    				|-----> Unset the value .
+
+	    => db.user.updateMany({name:"siddharth8"},{$set:{age:22,}},{upsert:true})
+	    				|
+	    				|-----> If matched condition data not present and upsert is ture so it will be new create documents (work like updateOrCreate)
+
+
+
+
+Data Types:
+
+		
+		=> Mongodb store data in BSON(Binary JSON formate).
+		=> BSON inclues  all json  datatypes and adds more .
+		=> Choosing the correct datatype is essentials for efficent storage and querying .
+
+			{
+			  _id: ObjectId("67327202bf5c9a79e8c1c195"),           // ObjectId: Unique identifier
+			  name: "Siddharth",                                   // String: Text data
+			  email: "siddharth@example.com",                      // String: Email
+			  yearOfExperience: NumberInt(15),                     // Int32: Integer (32-bit)
+			  age: NumberLong(25),                                 // Int64: Integer (64-bit)
+			  rating: NumberDouble(4.5),                           // Double: Floating-point number
+			  isActive: true,                                      // Boolean: True/False
+			  skills: ["JavaScript", "MongoDB", "Node.js"],        // Array: List of items
+			  address: {                                           // Embedded Document (Object): Nested structure
+			    city: "New Delhi",
+			    postalCode: "110001"
+			  },
+			  lastLogin: new Date("2023-10-05T14:48:00Z"),         // Date: Date and time
+			  additionalInfo: null,                                // Null: Absence of a value
+			  binaryData: new BinData(0, "SGVsbG8gd29ybGQ="),      // Binary Data: Base64 encoded binary
+			  decimalValue: NumberDecimal("99.99"),                // Decimal128: High-precision decimal (128-bit)
+			  location: { type: "Point", coordinates: [77.209, 28.6139] }, // GeoJSON: Geo-spatial data
+			  mixedArray: [42, "Answer", false, { key: "value" }], // Mixed Array: Array with multiple data types
+			  symbolType: Symbol("uniqueSymbol"),                  // Symbol: Used for identifiers
+			  minKeyField: MinKey(),                               // MinKey: Lower bound for comparison
+			  maxKeyField: MaxKey()                                // MaxKey: Upper bound for comparison
+			}
+
+
+Comparison Operators :
+
+			$eq     $lt    $gt   $lte   $gte $ne
+			 =       <      >    <=     >=   !=
+			Example: {age:{$eq:25}}
+
+
+			==> Case:  Find the cars with engine
+					|--------->  having 1498 and 2179cc
+					|--------->  Here we are trying search based on multiple values
+
+
+					$in $nin
+					
+					{age:{$in:[20,30]}}
